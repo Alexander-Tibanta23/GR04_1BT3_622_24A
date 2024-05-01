@@ -8,14 +8,6 @@
     <class>entity.Usuario</class>
     <class>entity.Producto</class>
     <class>entity.Venta</class>
-    <class>entity.Administradorinventario</class>
-    <class>entity.Cajero</class>
-    <class>entity.Productoventa</class>
-    <class>entity.ProductoventaId</class>
-    <class>entity.Pago</class>
-    <class>entity.Factura</class>
-
-
 
     <properties>
       <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/bd_SGVF"/>

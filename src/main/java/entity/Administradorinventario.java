@@ -6,12 +6,13 @@ import jakarta.persistence.*;
 @Table(name = "administradorinventario")
 public class Administradorinventario {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "idAdministradorInventario", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idAdministradorInventario", nullable = false)
+    private Usuario usuarios;
 
     public Integer getId() {
         return id;
@@ -21,12 +22,12 @@ public class Administradorinventario {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuario getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarios(Usuario usuarios) {
+        this.usuarios = usuarios;
     }
 
 }

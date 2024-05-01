@@ -3,17 +3,16 @@ package entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "factura")
+@Table(name = "facturas")
 public class Factura {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "IDFactura", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "venta_id")
-    private Venta venta;
+    @JoinColumn(name = "IDVenta")
+    private Venta iDVenta;
 
-    @Lob
     @Column(name = "detalles")
     private String detalles;
 
@@ -25,12 +24,12 @@ public class Factura {
         this.id = id;
     }
 
-    public Venta getVenta() {
-        return venta;
+    public Venta getIDVenta() {
+        return iDVenta;
     }
 
-    public void setVenta(Venta venta) {
-        this.venta = venta;
+    public void setIDVenta(Venta iDVenta) {
+        this.iDVenta = iDVenta;
     }
 
     public String getDetalles() {

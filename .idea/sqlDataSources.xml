@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="40ba262e-86a8-48a8-b841-60031a966ae9" name="bd_SGVF@localhost Mapping">
+      <data-sources db="5693ad96-02c8-488f-87c5-58f08be5771c" />
+      <scope>
+        <node negative="1">
+          <node kind="database" negative="1" />
+          <node kind="schema" qname="bd_sgvf" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>

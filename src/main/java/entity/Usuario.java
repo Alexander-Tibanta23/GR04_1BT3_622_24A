@@ -1,28 +1,29 @@
 package entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "idUsuario", nullable = false)
     private Integer id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", length = 100)
     private String nombre;
 
-    @Column(name = "apellido")
+    @Column(name = "apellido", length = 100)
     private String apellido;
 
-    @Column(name = "cedula")
+    @Column(name = "cedula", length = 20)
     private String cedula;
 
-    @Column(name = "correo")
+    @Column(name = "correo", length = 100)
     private String correo;
+
+    @Lob
+    @Column(name = "tipoUsuario", nullable = false)
+    private String tipoUsuario;
 
     public Integer getId() {
         return id;
@@ -62,6 +63,14 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
 }

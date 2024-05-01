@@ -2,27 +2,32 @@ package entity;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity
-@Table(name = "pago")
+@Table(name = "pagos")
 public class Pago {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "IDPago", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "venta_id")
-    private Venta venta;
+    @JoinColumn(name = "IDVenta")
+    private Venta iDVenta;
 
-    @Column(name = "monto", precision = 10, scale = 2)
-    private BigDecimal monto;
+    @Column(name = "monto")
+    private Double monto;
 
-    @Column(name = "metodoPago")
-    private String metodoPago;
-
-    @Column(name = "estado")
+    @Column(name = "estado", length = 50)
     private String estado;
+
+    @Lob
+    @Column(name = "tipoPago")
+    private String tipoPago;
+
+    @Column(name = "detallesCuenta")
+    private String detallesCuenta;
+
+    @Column(name = "numeroTarjeta", length = 20)
+    private String numeroTarjeta;
 
     public Integer getId() {
         return id;
@@ -32,28 +37,20 @@ public class Pago {
         this.id = id;
     }
 
-    public Venta getVenta() {
-        return venta;
+    public Venta getIDVenta() {
+        return iDVenta;
     }
 
-    public void setVenta(Venta venta) {
-        this.venta = venta;
+    public void setIDVenta(Venta iDVenta) {
+        this.iDVenta = iDVenta;
     }
 
-    public BigDecimal getMonto() {
+    public Double getMonto() {
         return monto;
     }
 
-    public void setMonto(BigDecimal monto) {
+    public void setMonto(Double monto) {
         this.monto = monto;
-    }
-
-    public String getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(String metodoPago) {
-        this.metodoPago = metodoPago;
     }
 
     public String getEstado() {
@@ -62,6 +59,30 @@ public class Pago {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getTipoPago() {
+        return tipoPago;
+    }
+
+    public void setTipoPago(String tipoPago) {
+        this.tipoPago = tipoPago;
+    }
+
+    public String getDetallesCuenta() {
+        return detallesCuenta;
+    }
+
+    public void setDetallesCuenta(String detallesCuenta) {
+        this.detallesCuenta = detallesCuenta;
+    }
+
+    public String getNumeroTarjeta() {
+        return numeroTarjeta;
+    }
+
+    public void setNumeroTarjeta(String numeroTarjeta) {
+        this.numeroTarjeta = numeroTarjeta;
     }
 
 }

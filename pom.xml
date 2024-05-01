@@ -17,24 +17,6 @@
         <junit.version>5.9.2</junit.version>
     </properties>
 
-    <servlet>
-        <servlet-name>AgregarProductoServlet</servlet-name>
-        <servlet-class>AgregarProductoServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AgregarProductoServlet</servlet-name>
-        <url-pattern>/agregarProducto</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ProcesarVentaServlet</servlet-name>
-        <servlet-class>ProcesarVentaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProcesarVentaServlet</servlet-name>
-        <url-pattern>/procesarVenta</url-pattern>
-    </servlet-mapping>
-
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
