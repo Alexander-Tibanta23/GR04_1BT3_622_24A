@@ -27,7 +27,7 @@ public class VentaServlet extends HttpServlet {
         venta.setFecha(Instant.now());
         venta.setTotalVenta(totalVenta);
         venta.setEstadoPago(estadoPago);
-
+        //a
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
