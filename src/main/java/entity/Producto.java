@@ -1,96 +1,45 @@
 package entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-import java.math.BigDecimal;
-
-@Entity
-@Table(name = "productos")
 public class Producto {
-    @Id
-    @Column(name = "idProducto", nullable = false)
-    private Integer id;
-
-    @Column(name = "nombreProducto", nullable = false)
-    private String nombreProducto;
-
-    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
-    private BigDecimal precio;
-
-    @Column(name = "marca")
+    private String nombre;
+    private double precio;
     private String marca;
-
-    @Column(name = "garantia")
+    private String modelo;
     private String garantia;
+    private String categoria;
+    private int stock;
 
-    @Column(name = "stock")
-    private Integer stock;
-
-    public Producto(Integer id, String nombreProducto, BigDecimal precio, String marca, String garantia, Integer stock) {
-        this.id = id;
-        this.nombreProducto = nombreProducto;
+    public Producto(String nombre, double precio, String marca, String garantia, int stock) {
+        this.nombre = nombre;
         this.precio = precio;
         this.marca = marca;
         this.garantia = garantia;
         this.stock = stock;
     }
 
-    public Producto(String nombreProducto, double precioProducto, String marcaProducto, String garantiaProducto, int cantidadProducto) {
-
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombreProducto() {
-        return nombreProducto;
-    }
-
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
-    }
-
-    public BigDecimal getPrecio() {
+    public double getPrecio() {
         return precio;
-    }
-
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
     }
 
     public String getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
     public String getGarantia() {
         return garantia;
     }
 
-    public void setGarantia(String garantia) {
-        this.garantia = garantia;
-    }
 
-    public Integer getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock) {
+    public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public Object getNombre() {
-        return null;
     }
 }
