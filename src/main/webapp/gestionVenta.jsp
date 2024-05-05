@@ -63,7 +63,6 @@ Stock: <input type="text" name="stockProducto" disabled><br/>
 <%
     if (request.getAttribute("cliente") != null) {
         Cliente cliente = (Cliente) request.getAttribute("cliente");
-        // Asegúrate de que este método obtiene el nombre del usuario correctamente
         if (cliente.getUsuario() != null) {
             System.out.println("Cliente: " + cliente.getUsuario().getNombre());
         } else {
