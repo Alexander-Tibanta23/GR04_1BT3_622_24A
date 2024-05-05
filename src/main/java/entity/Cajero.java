@@ -3,23 +3,23 @@ package entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cajeros")
-public class Cajero {
+@DiscriminatorValue("Cajero")
+public class Cajero extends Usuario{
     @Id
     @Column(name = "numeroCedula", nullable = false, length = 20)
-    private String numeroCedula;
+    private Integer numeroCedula;
 
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "numeroCedula", nullable = false)
     private Usuario usuarios;
 
-    public String getNumeroCedula() {
+    public Integer getNumeroCedula() {
         return numeroCedula;
     }
 
     public void setNumeroCedula(String numeroCedula) {
-        this.numeroCedula = numeroCedula;
+        this.numeroCedula = Integer.valueOf(numeroCedula);
     }
 
     public Usuario getUsuarios() {

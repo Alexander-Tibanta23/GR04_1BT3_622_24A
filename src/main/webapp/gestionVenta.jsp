@@ -10,36 +10,71 @@
 <html>
 <head>
     <title>Ventas</title>
+    <script>
+        function fetchData(tipo) {
+            var form = document.getElementById(tipo + 'Form');
+            form.submit();
+        }
+    </script>
 </head>
 <body>
 <h2>Formulario de Venta</h2>
-<form action="venta" method="get">
-    Cliente ID: <input type="text" name="clienteId" /><br/>
-    Producto ID: <input type="text" name="productoId" /><br/>
-    <input type="submit" value="Buscar" />
+<form id="clienteForm" action="fetchData" method="get">
+    <input type="hidden" name="tipo" value="cliente"/>
+    Cliente ID: <input type="text" name="clienteId" value="<%= request.getParameter("clienteId") != null ? request.getParameter("clienteId") : "" %>" />
+    <button type="button" onclick="fetchData('cliente')">Buscar Cliente</button>
 </form>
-<hr/>
+<h3>Datos del Cliente</h3>
+<% if (request.getAttribute("cliente") != null) {
+    Cliente cliente = (Cliente) request.getAttribute("cliente");
+%>
+Nombre: <input type="text" name="nombreCliente" value="<%= cliente.getNombre() %>" disabled><br/>
+Apellido: <input type="text" name="apellidoCliente" value="<%= cliente.getApellido() %>" disabled><br/>
+Dirección: <input type="text" name="direccionCliente" value="<%= cliente.getDireccion() %>" disabled><br/>
+Correo: <input type="text" name="correoCliente" value="<%= cliente.getCorreo() %>" disabled><br/>
+<% } else { %>
+Nombre: <input type="text" name="nombreCliente" disabled><br/>
+Apellido: <input type="text" name="apellidoCliente" disabled><br/>
+Dirección: <input type="text" name="direccionCliente" disabled><br/>
+Correo: <input type="text" name="correoCliente" disabled><br/>
+<% } %>
+<form id="productoForm" action="fetchData" method="get">
+    <input type="hidden" name="tipo" value="producto"/>
+    Producto ID: <input type="text" name="productoId" value="<%= request.getParameter("productoId") != null ? request.getParameter("productoId") : "" %>" />
+    <button type="button" onclick="fetchData('producto')">Buscar Producto</button>
+</form>
+<h3>Datos del Producto</h3>
+<% if (request.getAttribute("producto") != null) {
+    Producto producto = (Producto) request.getAttribute("producto");
+%>
+Nombre: <input type="text" name="nombreProducto" value="<%= producto.getNombre() %>" disabled><br/>
+Marca: <input type="text" name="marcaProducto" value="<%= producto.getMarca() %>" disabled><br/>
+Precio: <input type="text" name="precioProducto" value="<%= producto.getPrecio().toString() %>" disabled><br/>
+Garantía: <input type="text" name="garantiaProducto" value="<%= producto.getGarantia() %>" disabled><br/>
+Stock: <input type="text" name="stockProducto" value="<%= Integer.toString(producto.getStock()) %>" disabled><br/>
+<% } else { %>
+Nombre: <input type="text" name="nombreProducto" disabled><br/>
+Marca: <input type="text" name="marcaProducto" disabled><br/>
+Precio: <input type="text" name="precioProducto" disabled><br/>
+Garantía: <input type="text" name="garantiaProducto" disabled><br/>
+Stock: <input type="text" name="stockProducto" disabled><br/>
+<% } %>
 
 <%
-    Cliente cliente = (Cliente) request.getAttribute("cliente");
-    Producto producto = (Producto) request.getAttribute("producto");
-    if (cliente != null) {
+    if (request.getAttribute("cliente") != null) {
+        Cliente cliente = (Cliente) request.getAttribute("cliente");
+        // Asegúrate de que este método obtiene el nombre del usuario correctamente
+        if (cliente.getUsuario() != null) {
+            System.out.println("Cliente: " + cliente.getUsuario().getNombre());
+        } else {
+            System.out.println("Cliente encontrado, pero el objeto Usuario es null.");
+        }
+    } else if (request.getAttribute("producto") != null) {
+        Producto producto = (Producto) request.getAttribute("producto");
+        System.out.println("Producto: " + producto.getNombre());
+    }
 %>
-<h3>Cliente</h3>
-Nombre: <%= cliente.getUsuarios().getNombre() %><br/>
-Apellido: <%= cliente.getUsuarios().getApellido() %><br/>
-Dirección: <%= cliente.getUsuarios().getDireccion() %><br/>
-Correo: <%= cliente.getUsuarios().getCorreo() %><br/>
-<% } %>
-<%
-    if (producto != null) {
-%>
-<h3>Producto</h3>
-Nombre: <%= producto.getNombre() %><br/>
-Marca: <%= producto.getMarca() %><br/>
-Precio: <%= producto.getPrecio().toString() %><br/>
-Garantía: <%= producto.getGarantia() %><br/>
-Stock: <%= producto.getStock() %><br/>
-<% } %>
+
+
 </body>
 </html>
