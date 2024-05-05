@@ -1,36 +1,35 @@
 package entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @Column(name = "idUsuario", nullable = false)
-    private Integer id;
+    @Column(name = "numeroCedula", nullable = false, length = 20)
+    private String numeroCedula;
 
-    @Column(name = "nombre", length = 100)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "apellido", length = 100)
+    @Column(name = "apellido", nullable = false)
     private String apellido;
 
-    @Column(name = "cedula", length = 20)
-    private String cedula;
+    @Column(name = "direccion")
+    private String direccion;
 
-    @Column(name = "correo", length = 100)
+    @Column(name = "correo")
     private String correo;
 
-    @Lob
-    @Column(name = "tipoUsuario", nullable = false)
-    private String tipoUsuario;
-
-    public Integer getId() {
-        return id;
+    public String getNumeroCedula() {
+        return numeroCedula;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setNumeroCedula(String numeroCedula) {
+        this.numeroCedula = numeroCedula;
     }
 
     public String getNombre() {
@@ -49,12 +48,12 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getCorreo() {
@@ -63,14 +62,6 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
     }
 
 }

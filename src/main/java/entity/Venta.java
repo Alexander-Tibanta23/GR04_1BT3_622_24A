@@ -2,50 +2,28 @@ package entity;
 
 import jakarta.persistence.*;
 
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "ventas")
 public class Venta {
     @Id
-    @Column(name = "IDVenta", nullable = false)
+    @Column(name = "idVenta", nullable = false)
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "numeroCedula", nullable = false)
+    private Cajero numeroCedula;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCajero")
-    private Cajero idCajero;
+    @JoinColumn(name = "idDescuento")
+    private Descuento idDescuento;
 
-    @Column(name = "fecha")
-    private Instant fecha;
+    @Column(name = "numeroProductos", nullable = false)
+    private Integer numeroProductos;
 
-    @Column(name = "totalVenta")
-    private Double totalVenta;
-
-    @Column(name = "estadoPago")
-    private Boolean estadoPago;
-
-    private Map<Producto, Integer> productos = new HashMap<>();
-
-    public void agregarProducto(Producto producto, int cantidad) {
-        if (producto.getStock() >= cantidad) {
-            productos.put(producto, productos.getOrDefault(producto, 0) + cantidad);
-            producto.setStock(producto.getStock() - cantidad); // Actualiza el stock del producto
-            // Aquí debería haber una lógica para persistir la actualización del stock en la base de datos
-        } else {
-            throw new RuntimeException("Stock insuficiente");
-        }
-    }
-
-    public double calcularTotal() {
-        double total = 0.0;
-        for (Map.Entry<Producto, Integer> entry : productos.entrySet()) {
-            total += entry.getKey().getPrecio() * entry.getValue();
-        }
-        setTotalVenta(total);
-        return total;
-    }
+    @Column(name = "totalVenta", nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalVenta;
 
     public Integer getId() {
         return id;
@@ -55,36 +33,39 @@ public class Venta {
         this.id = id;
     }
 
-    public Cajero getIdCajero() {
-        return idCajero;
+    public Cajero getNumeroCedula() {
+        return numeroCedula;
     }
 
-    public void setIdCajero(Cajero idCajero) {
-        this.idCajero = idCajero;
+    public void setNumeroCedula(Cajero numeroCedula) {
+        this.numeroCedula = numeroCedula;
     }
 
-    public Instant getFecha() {
-        return fecha;
+    public Descuento getIdDescuento() {
+        return idDescuento;
     }
 
-    public void setFecha(Instant fecha) {
-        this.fecha = fecha;
+    public void setIdDescuento(Descuento idDescuento) {
+        this.idDescuento = idDescuento;
     }
 
-    public Double getTotalVenta() {
+    public Integer getNumeroProductos() {
+        return numeroProductos;
+    }
+
+    public void setNumeroProductos(Integer numeroProductos) {
+        this.numeroProductos = numeroProductos;
+    }
+
+    public BigDecimal getTotalVenta() {
         return totalVenta;
     }
 
-    public void setTotalVenta(Double totalVenta) {
+    public void setTotalVenta(BigDecimal totalVenta) {
         this.totalVenta = totalVenta;
     }
 
-    public Boolean getEstadoPago() {
-        return estadoPago;
-    }
+    public void agregarProducto(Producto producto, int cantidad) {
 
-    public void setEstadoPago(Boolean estadoPago) {
-        this.estadoPago = estadoPago;
     }
-
 }

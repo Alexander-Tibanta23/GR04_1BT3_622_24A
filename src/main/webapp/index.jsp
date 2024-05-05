@@ -10,8 +10,11 @@
 <div>
     <h2>Acciones</h2>
     <ul>
-        <li><a href="registrarVenta.jsp">Registrar Venta</a></li>
-        <li><a href="gestionInventario.jsp">Gestion de Inventario</a></li>
+        <li><a href="descuento.jsp">Descuentos</a></li>
+        <br>
+        <li><a href="gestionInventario.jsp">Inventario</a></li>
+        <br>
+        <li><a href="gestionVenta.jsp">Venta</a></li>
     </ul>
 </div>
 </body>

@@ -3,8 +3,8 @@ package entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cajeros")
-public class Cajero {
+@Table(name = "administradoresinventario")
+public class Administradoresinventario {
     @Id
     @Column(name = "numeroCedula", nullable = false, length = 20)
     private String numeroCedula;

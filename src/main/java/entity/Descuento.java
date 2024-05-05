@@ -1,22 +1,28 @@
 package entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "descuentos")
 public class Descuento {
     @Id
-    @Column(name = "IDDescuento", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idDescuento", nullable = false)
     private Integer id;
 
-    @Column(name = "porcentaje")
-    private Float porcentaje;
+    @Column(name = "codigo", nullable = false)
+    private String codigo;
 
-    @Column(name = "condiciones")
-    private String condiciones;
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "porcentajeDescuento", nullable = false, precision = 5, scale = 2)
+    private BigDecimal porcentajeDescuento;
+
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
 
     public Integer getId() {
         return id;
@@ -26,20 +32,36 @@ public class Descuento {
         this.id = id;
     }
 
-    public Float getPorcentaje() {
-        return porcentaje;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setPorcentaje(Float porcentaje) {
-        this.porcentaje = porcentaje;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getCondiciones() {
-        return condiciones;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCondiciones(String condiciones) {
-        this.condiciones = condiciones;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public BigDecimal getPorcentajeDescuento() {
+        return porcentajeDescuento;
+    }
+
+    public void setPorcentajeDescuento(BigDecimal porcentajeDescuento) {
+        this.porcentajeDescuento = porcentajeDescuento;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
 }
