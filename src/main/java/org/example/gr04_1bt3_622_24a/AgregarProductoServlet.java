@@ -30,6 +30,9 @@ public class AgregarProductoServlet extends HttpServlet {
             request.setAttribute("mensaje", "Error: El producto ya existe en el inventario.");
         }
 
+        // Preguntar si quiere agregar otro producto
+        request.setAttribute("agregarOtro", true);
+
         // Redirigir de vuelta al formulario
         request.getRequestDispatcher("/formularioAgregarProducto.jsp").forward(request, response);
     }
