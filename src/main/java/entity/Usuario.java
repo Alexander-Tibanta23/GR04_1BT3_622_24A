@@ -1,16 +1,15 @@
 package entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
     @Id
     @Column(name = "numeroCedula", nullable = false, length = 20)
-    private String numeroCedula;
+    private Integer numeroCedula;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -24,12 +23,12 @@ public class Usuario {
     @Column(name = "correo")
     private String correo;
 
-    public String getNumeroCedula() {
+    public Integer getNumeroCedula() {
         return numeroCedula;
     }
 
     public void setNumeroCedula(String numeroCedula) {
-        this.numeroCedula = numeroCedula;
+        this.numeroCedula = Integer.valueOf(numeroCedula);
     }
 
     public String getNombre() {
