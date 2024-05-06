@@ -1,5 +1,6 @@
 package org.example.gr04_1bt3_622_24a;
 
+import com.ecodeup.jdbc.Conexion;
 import com.google.gson.Gson;
 import entity.Producto;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,23 +48,13 @@ public class InventarioService extends HttpServlet {
 
     public List<Producto> obtenerProductos() {
         List<Producto> productos = new ArrayList<>();
-        String url = "jdbc:mysql://127.0.0.1/tiendaelectrodomesticos?serverTimezone=UTC";
-        String user = "root";
-        String password = "1234";
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = Conexion.obtenerConexion() ;
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM producto")) {
 
             while (resultSet.next()) {
-                Producto producto = new Producto(
-                        resultSet.getString("nombreProducto"),
-                        resultSet.getDouble("precioProducto"),
-                        resultSet.getString("marcaProducto"),
-                        resultSet.getString("garantiaProducto"),
-                        resultSet.getInt("cantidadProducto")
-                );
-                productos.add(producto);
+                importarDatosDeBDAProductos(resultSet, productos);
             }
 
         } catch (SQLException e) {
@@ -77,11 +67,8 @@ public class InventarioService extends HttpServlet {
 
     public static List<Producto> buscarProducto(String filtro, String terminoBusqueda) {
         List<Producto> productos = new ArrayList<>();
-        String url = "jdbc:mysql://127.0.0.1/tiendaelectrodomesticos?serverTimezone=UTC";
-        String user = "root";
-        String password = "1234";
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = Conexion.obtenerConexion() ;
              PreparedStatement statement = connection.prepareStatement(
                      "SELECT * FROM producto WHERE " + filtro + " LIKE ?")) {
 
@@ -91,14 +78,7 @@ public class InventarioService extends HttpServlet {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                Producto producto = new Producto(
-                        resultSet.getString("nombreProducto"),
-                        resultSet.getDouble("precioProducto"),
-                        resultSet.getString("marcaProducto"),
-                        resultSet.getString("garantiaProducto"),
-                        resultSet.getInt("cantidadProducto")
-                );
-                productos.add(producto);
+                importarDatosDeBDAProductos(resultSet, productos);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al buscar productos en la base de datos", e);
@@ -106,4 +86,16 @@ public class InventarioService extends HttpServlet {
 
         return productos;
     }
+
+    private static void importarDatosDeBDAProductos(ResultSet resultSet, List<Producto> productos) throws SQLException {
+        Producto producto = new Producto(
+                resultSet.getString("nombreProducto"),
+                resultSet.getDouble("precioProducto"),
+                resultSet.getString("marcaProducto"),
+                resultSet.getString("garantiaProducto"),
+                resultSet.getInt("cantidadProducto")
+        );
+        productos.add(producto);
+    }
+
 }

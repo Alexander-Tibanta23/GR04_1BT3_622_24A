@@ -1,5 +1,6 @@
 package org.example.gr04_1bt3_622_24a;
 
+import com.ecodeup.jdbc.Conexion;
 import entity.Producto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -38,11 +38,8 @@ public class AgregarProductoServlet extends HttpServlet {
     }
 
     private boolean agregarProducto(Producto producto) {
-        String url = "jdbc:mysql://127.0.0.1/tiendaelectrodomesticos?serverTimezone=UTC";
-        String user = "root";
-        String password = "1234";
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = Conexion.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(
                      "INSERT INTO Producto (nombreProducto, precioProducto, marcaProducto, garantiaProducto, cantidadProducto) VALUES (?, ?, ?, ?, ?)")) {
 
