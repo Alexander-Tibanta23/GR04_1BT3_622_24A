@@ -1,10 +1,19 @@
 package entity;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Venta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     private List<ProductoVenta> productos;
+
     private double total;
 
     public Venta() {
@@ -13,7 +22,8 @@ public class Venta {
     }
 
     public void agregarProducto(Producto producto, int cantidad) {
-        productos.add(new ProductoVenta(producto, cantidad));
+        ProductoVenta pv = new ProductoVenta(producto, cantidad, this);
+        productos.add(pv);
         calcularTotal();
     }
 
@@ -39,13 +49,28 @@ public class Venta {
     }
 }
 
+@Entity
 class ProductoVenta {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "venta_id")
+    private Venta venta;
+
+    @ManyToOne
     private Producto producto;
+
     private int cantidad;
 
-    public ProductoVenta(Producto producto, int cantidad) {
+    public ProductoVenta() {
+    }
+
+    public ProductoVenta(Producto producto, int cantidad, Venta venta) {
         this.producto = producto;
         this.cantidad = cantidad;
+        this.venta = venta;
     }
 
     public Producto getProducto() {

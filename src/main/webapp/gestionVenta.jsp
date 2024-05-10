@@ -49,9 +49,9 @@ Correo: <input type="text" name="correoCliente" disabled><br/>
 %>
 Nombre: <input type="text" name="nombreProducto" value="<%= producto.getNombre() %>" disabled><br/>
 Marca: <input type="text" name="marcaProducto" value="<%= producto.getMarca() %>" disabled><br/>
-Precio: <input type="text" name="precioProducto" value="<%= producto.getPrecio().toString() %>" disabled><br/>
+Precio: <input type="text" name="precioProducto" value="<%= producto.getPrecio() %>" disabled><br/>
 Garantía: <input type="text" name="garantiaProducto" value="<%= producto.getGarantia() %>" disabled><br/>
-Stock: <input type="text" name="stockProducto" value="<%= Integer.toString(producto.getStock()) %>" disabled><br/>
+Stock: <input type="text" name="stockProducto" value="<%= producto.getStock() %>" disabled><br/>
 <% } else { %>
 Nombre: <input type="text" name="nombreProducto" disabled><br/>
 Marca: <input type="text" name="marcaProducto" disabled><br/>

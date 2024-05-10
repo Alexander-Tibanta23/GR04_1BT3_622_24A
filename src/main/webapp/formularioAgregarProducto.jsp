@@ -1,5 +1,3 @@
-<%@ page import="org.example.gr04_1bt3_622_24a.AgregarProductoServlet" %>
-<%@ page import="entity.Producto" %>
 <%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,8 +16,8 @@
     <input type="text" id="marca" name="marca" required><br>
     <label for="garantia">Garantía:</label>
     <select id="garantia" name="garantia">
-        <option value="1">Si</option>
-        <option value="2">No</option>
+        <option value="1">1 año</option>
+        <option value="2">2 años</option>
     </select><br>
 
     <label for="stock">Stock:</label>

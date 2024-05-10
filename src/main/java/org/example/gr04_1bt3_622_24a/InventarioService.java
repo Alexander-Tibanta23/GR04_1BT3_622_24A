@@ -1,27 +1,26 @@
 package org.example.gr04_1bt3_622_24a;
 
-import com.ecodeup.jdbc.Conexion;
 import com.google.gson.Gson;
 import entity.Producto;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import util.HibernateUtil;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet({"/obtenerProductos", "/buscarProducto"})
 public class InventarioService extends HttpServlet {
 
-    static {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("Error al cargar el controlador JDBC", e);
-        }
+    private static final InventarioService instance = new InventarioService();
+
+    public static InventarioService getInstance() {
+        return instance;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -45,57 +44,19 @@ public class InventarioService extends HttpServlet {
         response.getWriter().write(json);
     }
 
-
     public List<Producto> obtenerProductos() {
-        List<Producto> productos = new ArrayList<>();
-
-        try (Connection connection = Conexion.obtenerConexion() ;
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM producto")) {
-
-            while (resultSet.next()) {
-                importarDatosDeBDAProductos(resultSet, productos);
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al obtener los productos de la base de datos", e);
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Producto> query = session.createQuery("FROM Producto", Producto.class);
+            return query.getResultList();
         }
-
-        return productos;
     }
 
-
-    public static List<Producto> buscarProducto(String filtro, String terminoBusqueda) {
-        List<Producto> productos = new ArrayList<>();
-
-        try (Connection connection = Conexion.obtenerConexion() ;
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT * FROM producto WHERE " + filtro + " LIKE ?")) {
-
-            String searchTerm = "%" + terminoBusqueda + "%";
-            statement.setString(1, searchTerm);
-
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                importarDatosDeBDAProductos(resultSet, productos);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al buscar productos en la base de datos", e);
+    public List<Producto> buscarProducto(String filtro, String terminoBusqueda) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Producto> query = session.createQuery("FROM Producto p WHERE p." + filtro + " LIKE :terminoBusqueda", Producto.class);
+            query.setParameter("terminoBusqueda", "%" + terminoBusqueda + "%");
+            return query.getResultList();
         }
-
-        return productos;
-    }
-
-    private static void importarDatosDeBDAProductos(ResultSet resultSet, List<Producto> productos) throws SQLException {
-        Producto producto = new Producto(
-                resultSet.getString("nombreProducto"),
-                resultSet.getDouble("precioProducto"),
-                resultSet.getString("marcaProducto"),
-                resultSet.getString("garantiaProducto"),
-                resultSet.getInt("cantidadProducto")
-        );
-        productos.add(producto);
     }
 
 }

@@ -1,7 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.gr04_1bt3_622_24a.InventarioService" %>
 <%@ page import="entity.Producto" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,6 +42,7 @@
 </form>
 
 <h2>Inventario Actual</h2>
+<form action = "obtenerProductos" method="get">
 <table id="tablaProductos">
     <tr>
         <th>Nombre</th>
@@ -52,7 +52,7 @@
         <th>Stock</th>
     </tr>
     <%
-        InventarioService inventarioService = new InventarioService();
+        InventarioService inventarioService = InventarioService.getInstance();
         List<Producto> productos = inventarioService.obtenerProductos();
 
         for (Producto producto : productos) {
@@ -66,6 +66,7 @@
     </tr>
     <% } %>
 </table>
+</form>
 
 <button onclick="mostrarFormulario()">Agregar Producto</button>
 

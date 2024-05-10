@@ -1,20 +1,21 @@
 package org.example.gr04_1bt3_622_24a;
 
-import com.ecodeup.jdbc.Conexion;
 import entity.Producto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 @WebServlet("/agregarProducto")
 public class AgregarProductoServlet extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Recibir los datos del producto desde un formulario
         String nombre = request.getParameter("nombre");
@@ -23,7 +24,13 @@ public class AgregarProductoServlet extends HttpServlet {
         String garantia = request.getParameter("garantia");
         int stock = Integer.parseInt(request.getParameter("stock"));
 
-        Producto producto = new Producto(nombre, precio, marca, garantia, stock);
+        Producto producto = new Producto();
+        producto.setNombre(nombre);
+        producto.setPrecio(precio);
+        producto.setMarca(marca);
+        producto.setGarantia(garantia);
+        producto.setStock(stock);
+
         if (agregarProducto(producto)) {
             request.setAttribute("mensaje", "Producto agregado con éxito: " + nombre);
         } else {
@@ -38,21 +45,18 @@ public class AgregarProductoServlet extends HttpServlet {
     }
 
     private boolean agregarProducto(Producto producto) {
-
-        try (Connection connection = Conexion.obtenerConexion();
-             PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO Producto (nombreProducto, precioProducto, marcaProducto, garantiaProducto, cantidadProducto) VALUES (?, ?, ?, ?, ?)")) {
-
-            statement.setString(1, producto.getNombre());
-            statement.setDouble(2, producto.getPrecio());
-            statement.setString(3, producto.getMarca());
-            statement.setString(4, producto.getGarantia());
-            statement.setInt(5, producto.getStock());
-
-            int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al agregar el producto a la base de datos", e);
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(producto);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
         }
     }
 }

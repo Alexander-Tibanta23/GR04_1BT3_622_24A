@@ -1,20 +1,32 @@
 package entity;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "productos")
 
 public class Producto {
+
+    @Id
+    @Column(name = "idProducto", nullable = false, length = 4)
+    private int idProducto;
+
+    @Column(name = "nombreProducto", nullable = false, length = 20)
     private String nombre;
+
+    @Column(name = "precio", nullable = false, length = 4)
     private double precio;
+
+    @Column(name = "marca", nullable = false, length = 20)
     private String marca;
-    private String modelo;
+
+    @Column(name = "garantia", nullable = false, length = 10)
     private String garantia;
-    private String categoria;
+
+    @Column(name = "stock", nullable = false, length = 3)
     private int stock;
 
-    public Producto(String nombre, double precio, String marca, String garantia, int stock) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.marca = marca;
-        this.garantia = garantia;
-        this.stock = stock;
+    public Integer getIdProducto() {
+        return idProducto;
     }
 
     // Getters y Setters
@@ -34,7 +46,6 @@ public class Producto {
         return garantia;
     }
 
-
     public int getStock() {
         return stock;
     }
@@ -42,4 +53,21 @@ public class Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setGarantia(String garantia) {
+        this.garantia = garantia;
+    }
+
 }
