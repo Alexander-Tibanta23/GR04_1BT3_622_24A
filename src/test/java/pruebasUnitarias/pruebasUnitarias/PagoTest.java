@@ -33,10 +33,13 @@ public class PagoTest {
         System.out.println("Antes de cada prueba");
     }
 
+    //test unitario simple
     @Test(expected = SaldoInsuficienteException.class)
     public void realizarPago_when_exist_SaldoInsuficiente() throws SaldoInsuficienteException {
+        System.out.println("test 1");
         Pago pago = new Pago(100);
         pago.realizarPago(150);
-        System.out.println("test 1");
     }
+
+
 }

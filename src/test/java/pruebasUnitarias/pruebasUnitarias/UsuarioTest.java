@@ -29,12 +29,11 @@ public class UsuarioTest {
         System.out.println("Antes de cada prueba");
     }
 
-
     @Test
-    public void verificarCedula_when_is_ecuadorias(){
+    public void verificarCedula_when_is_ecuadorian(){
+        System.out.println("test 2");
         Usuario usuario = new Usuario();
         assertEquals(true, usuario.verificarCedula());
-        System.out.println("test 2");
     }
 
 }

@@ -32,17 +32,16 @@ public class VentaTest {
 
     @Test
     public void calcularTotal_when_salesTax_is_15Percent() {
+        System.out.println("test 3");
         Venta venta = new Venta();
         assertEquals(57.50, venta.calcularImpuesto(50, 1.15), 0.1);
-        System.out.println("test 3");
     }
 
     @Test
     public void calcular_subTotal_when_buy_many_items() {
+        System.out.println("test 4");
         Venta venta = new Venta();
         assertEquals(150, venta.calcularTotalItems(5, 30));
-        System.out.println("test 4");
     }
-
 
 }
