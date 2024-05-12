@@ -11,4 +11,6 @@ public class Venta {
     public int calcularTotalItems(int numItems, int totalItems) {
         return numItems * totalItems;
     }
+
+    
 }

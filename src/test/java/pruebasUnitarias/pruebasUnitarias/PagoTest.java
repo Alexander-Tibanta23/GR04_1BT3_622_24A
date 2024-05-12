@@ -22,41 +22,21 @@ public class PagoTest {
         System.out.println("Después de todas las pruebas");
     }
 
-    @Before
-    public void setUp() {
-        System.out.println("Antes de cada prueba");
-        pago = new Pago("efectivo");
-    }
-
     @After
     public void tearDown() {
         System.out.println("Después de cada prueba");
     }
 
-    @Test
-    public void verificarPago_when_efectivo() {
-        assertTrue(pago.verificarPago());
+    @Before
+    public void setUp() {
+        pago = new Pago(100);
+        System.out.println("Antes de cada prueba");
+    }
+
+    @Test(expected = SaldoInsuficienteException.class)
+    public void realizarPago_when_exist_SaldoInsuficiente() throws SaldoInsuficienteException {
+        Pago pago = new Pago(100);
+        pago.realizarPago(150);
         System.out.println("test 1");
-    }
-
-    @Test
-    public void verificarPago_when_tarjeta() {
-        pago = new Pago("tarjeta");
-        assertTrue(pago.verificarPago());
-        System.out.println("test 2");
-    }
-
-    @Test
-    public void verificarPago_when_transferencia() {
-        pago = new Pago("transferencia");
-        assertTrue(pago.verificarPago());
-        System.out.println("test 3");
-    }
-
-    @Test
-    public void verificarPago_when_invalido() {
-        pago = new Pago("cheque");
-        assertFalse(pago.verificarPago());
-        System.out.println("test 4");
     }
 }

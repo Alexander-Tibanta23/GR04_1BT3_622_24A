@@ -2,17 +2,20 @@ package pruebasUnitarias.pruebasUnitarias;
 
 public class Pago {
 
-    private String metodoPago;
+    private int saldoDisponible;
 
-    public Pago(String metodoPago) {
-        this.metodoPago = metodoPago;
+    public Pago(int saldoDisponible) {
+        this.saldoDisponible = saldoDisponible;
     }
 
-    public boolean verificarPago() {
-        if ("efectivo".equals(metodoPago) || "tarjeta".equals(metodoPago) || "transferencia".equals(metodoPago)) {
-            return true;
-        } else {
-            return false;
+
+    public void realizarPago(double monto) throws SaldoInsuficienteException {
+        if (monto > this.saldoDisponible) {
+            throw new SaldoInsuficienteException("Saldo insuficiente para realizar el pago");
+        }else{
+            this.saldoDisponible -= monto;
+            System.out.println("Pago realizado com sucesso");
         }
     }
+
 }
