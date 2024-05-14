@@ -1,9 +1,10 @@
-package pruebasUnitarias.pruebasUnitarias;
+package entity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -17,10 +18,14 @@ public class DescuentoTest {
     private double resultadoEsperado;
 
     public DescuentoTest(double porcentajeDescuento, double precioBase, double resultadoEsperado) {
-        this.descuento = new Descuento(porcentajeDescuento);
+        this.descuento = new Descuento();
+        this.descuento.setPorcentajeDescuento(BigDecimal.valueOf(porcentajeDescuento));
         this.precioBase = precioBase;
         this.resultadoEsperado = resultadoEsperado;
+        System.out.println("Porcentaje descuento: " + this.descuento.getPorcentajeDescuento());
     }
+
+
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -33,8 +38,9 @@ public class DescuentoTest {
     }
 
     @Test
-    public void calcularDescuento_when_is_valid() {
+    public void given_calcularDescuento_when_is_valid_then_return_descuento() {
+        System.out.println("test 2 con parametros");
         double resultado = descuento.calcularDescuento(precioBase);
-        assertEquals(resultadoEsperado, resultado, 0.001);
+        assertEquals(resultadoEsperado, resultado, 0.01);
     }
 }

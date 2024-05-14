@@ -59,4 +59,8 @@ public class InventarioService extends HttpServlet {
         }
     }
 
+    //incremento test
+    public boolean agregarProducto(Producto producto) {
+        return true;
+    }
 }

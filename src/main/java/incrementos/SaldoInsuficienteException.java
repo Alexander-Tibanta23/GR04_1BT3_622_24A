@@ -1,4 +1,4 @@
-package pruebasUnitarias.pruebasUnitarias;
+package incrementos;
 
 public class SaldoInsuficienteException extends Exception {
 

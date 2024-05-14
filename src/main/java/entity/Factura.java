@@ -29,4 +29,7 @@ public class Factura {
         this.idVenta = idVenta;
     }
 
+    public boolean generarPDF() {
+        return true;
+    }
 }

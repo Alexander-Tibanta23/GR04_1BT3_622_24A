@@ -47,6 +47,19 @@ public class Venta {
     public List<ProductoVenta> getProductos() {
         return productos;
     }
+
+    //incremento del test
+    public double calcularImpuesto(double subTotal, double impuesto) {
+
+        return subTotal * impuesto;
+    }
+
+    //incremento del test
+    public int calcularTotalItems(int numItems, int totalItems) {
+        return numItems * totalItems;
+    }
+
+
 }
 
 @Entity
