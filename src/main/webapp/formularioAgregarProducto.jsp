@@ -1,5 +1,4 @@
-<%@ page import="org.example.gr04_1bt3_622_24a.AgregarProductoServlet" %>
-<%@ page import="entity.Producto" %>
+<%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,7 +6,7 @@
     <title>Agregar Producto</title>
 </head>
 <body>
-<h2>Agregar Producto</h2>
+<h2>Ingresar Detalles del Producto</h2>
 <form action="agregarProducto" method="post">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required><br>
@@ -17,8 +16,8 @@
     <input type="text" id="marca" name="marca" required><br>
     <label for="garantia">Garantía:</label>
     <select id="garantia" name="garantia">
-        <option value="1">Si</option>
-        <option value="2">No</option>
+        <option value="1">1 año</option>
+        <option value="2">2 años</option>
     </select><br>
 
     <label for="stock">Stock:</label>
@@ -26,13 +25,29 @@
     <button type="submit">Agregar</button>
 </form>
 
-<%-- Mostrar mensaje de confirmación o error --%>
 <%
     String mensaje = (String) request.getAttribute("mensaje");
     if (mensaje != null) {
-        System.out.println("<p>" + mensaje + "</p>");
+        PrintWriter writer = response.getWriter();
+        writer.print("<p>" + mensaje + "</p>");
+        Boolean agregarOtro = (Boolean) request.getAttribute("agregarOtro");
+        if (agregarOtro != null && agregarOtro) {
+%>
+<p>¿Desea agregar otro producto?</p>
+<form action="agregarProducto" method="get">
+    <button type="submit">Sí</button>
+</form>
+<form action="index.jsp" method="get">
+    <button type="submit">No</button>
+</form>
+<%
+        } else {
+            // Redirigir a la página principal u otra página de tu elección
+            response.sendRedirect("index.jsp");
+        }
     }
 %>
+
 
 </body>
 </html>

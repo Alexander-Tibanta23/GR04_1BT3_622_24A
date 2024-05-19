@@ -3,6 +3,7 @@ package entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Entity
 @Table(name = "descuentos")
@@ -23,6 +24,17 @@ public class Descuento {
 
     @Column(name = "stock", nullable = false)
     private Integer stock;
+
+    public Descuento() {
+        this.porcentajeDescuento = BigDecimal.ZERO;
+    }
+
+    //incremento del test
+    public double calcularDescuento(double precioBase) {
+        BigDecimal porcentaje = porcentajeDescuento.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP); // Convertir el porcentaje a fracción
+        BigDecimal descuento = BigDecimal.valueOf(precioBase).multiply(porcentaje); // Calcular el descuento con BigDecimal
+        return descuento.setScale(2, RoundingMode.HALF_UP).doubleValue(); // Redondear a 2 decimales y devolver como double
+    }
 
     public Integer getId() {
         return id;
