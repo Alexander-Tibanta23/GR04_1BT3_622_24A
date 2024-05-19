@@ -42,6 +42,10 @@ public class Producto {
 
     }
 
+    public Producto() {
+
+    }
+
     public Integer getId() {
         return id;
     }
