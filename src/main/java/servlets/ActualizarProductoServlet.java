@@ -12,6 +12,8 @@ import java.io.IOException;
 
 @WebServlet("/actualizarProducto")
 public class ActualizarProductoServlet extends HttpServlet {
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener los parámetros del formulario
         int id = Integer.parseInt(request.getParameter("id"));

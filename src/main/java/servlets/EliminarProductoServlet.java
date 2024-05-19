@@ -12,6 +12,8 @@ import java.io.IOException;
 
 @WebServlet("/eliminarProducto")
 public class EliminarProductoServlet extends HttpServlet {
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener el ID del producto a eliminar
         int id = Integer.parseInt(request.getParameter("id"));

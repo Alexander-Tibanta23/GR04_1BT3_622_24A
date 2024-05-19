@@ -1,6 +1,8 @@
 package entity;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +29,12 @@ public class Venta {
         calcularTotal();
     }
 
-    public double calcularTotal() {
-        total = 0;
+    public BigDecimal calcularTotal() {
+        BigDecimal total = BigDecimal.ZERO;
         for (ProductoVenta pv : productos) {
-            total += pv.getProducto().getPrecio() * pv.getCantidad();
+            BigDecimal precioProducto = pv.getProducto().getPrecio();
+            BigDecimal cantidad = BigDecimal.valueOf(pv.getCantidad());
+            total = total.add(precioProducto.multiply(cantidad));
         }
         return total;
     }

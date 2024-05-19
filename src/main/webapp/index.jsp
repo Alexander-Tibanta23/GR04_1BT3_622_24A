@@ -118,14 +118,14 @@
                             <svg class="flex-shrink-0 w-5 h-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="text-base font-medium text-gray-900"> --- </span>
+                            <span class="text-base font-medium text-gray-900"> Agregar Descuentos </span>
                         </li>
 
                         <li class="inline-flex items-center space-x-2">
                             <svg class="flex-shrink-0 w-5 h-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="text-base font-medium text-gray-900"> --- </span>
+                            <span class="text-base font-medium text-gray-900"> Buscar Descuentos </span>
                         </li>
 
                         <li class="inline-flex items-center space-x-2">
@@ -150,8 +150,8 @@
                         </li>
                     </ul>
 
-                    <a href="descuento.jsp" title="" class="inline-flex items-center justify-center px-10 py-4 mt-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:bg-blue-700" role="button"> Acceder a Descuentos </a>
-                    <p class="mt-4 text-sm text-gray-500">---</p>
+                    <a href="gestionDescuento.jsp" title="" class="inline-flex items-center justify-center px-10 py-4 mt-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:bg-blue-700" role="button"> Acceder a Descuentos </a>
+                    <p class="mt-4 text-sm text-gray-500">Acceder</p>
                 </div>
             </div>
         </div>

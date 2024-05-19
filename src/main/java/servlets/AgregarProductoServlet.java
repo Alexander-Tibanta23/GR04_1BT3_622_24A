@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 
 @WebServlet("/agregarProducto")
 public class AgregarProductoServlet extends HttpServlet {
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
         double precio = Double.parseDouble(request.getParameter("precio"));

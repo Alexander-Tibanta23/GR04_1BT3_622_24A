@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 
 public class ProductoTest {
@@ -26,6 +28,6 @@ public class ProductoTest {
     public void given_stock_when_updateStock_then_stockUpdated() {
         System.out.println("test 7");
         producto.setStock(15);
-        assertEquals(15, producto.getStock());
+        assertEquals(Optional.of(15), producto.getStock());
     }
 }

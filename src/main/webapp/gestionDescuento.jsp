@@ -1,12 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="dao.ProductoDAO" %>
 <%@ page import="entity.Producto" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="dao.DescuentoDAO" %>
+<%@ page import="entity.Descuento" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gesti&oacute;n de Inventario</title>
+    <title>Gesti&oacute;n de Descuentos</title>
     <style>
         table {
             width: 100%;
@@ -25,82 +28,79 @@
     </style>
 </head>
 <body>
-<h1>Gestion de Inventario</h1>
+<h1>Descuentos</h1>
 
-<h2>Buscar Producto</h2>
+<h2>Buscar Descuento</h2>
+
 <form id="searchForm">
     <label for="filtro">Filtrar por:</label>
     <select id="filtro" name="filtro">
-        <option value="nombreProducto">Nombre</option>
-        <option value="precio">Precio</option>
-        <option value="marca">Marca</option>
-        <option value="garantia">Garantía</option>
+        <option value="codigo">Código</option>
+        <option value="nombre">Nombre</option>
+        <option value="porcentajeDescuento">Porcentaje Descuento</option>
         <option value="stock">Stock</option>
     </select>
-    <label for="terminoBusqueda">Termino de busqueda:</label>
+    <label for="terminoBusqueda">Término de búsqueda:</label>
     <input type="text" id="terminoBusqueda" name="terminoBusqueda">
     <button type="submit">Buscar</button>
 </form>
 
-<h2>Inventario Actual</h2>
-<table id="productos">
+<h2>Descuentos Actuales</h2>
+<table id="descuentos">
     <tr>
+        <th>Código</th>
         <th>Nombre</th>
-        <th>Precio</th>
-        <th>Marca</th>
-        <th>Garantia</th>
+        <th>Porcentaje Descuento</th>
         <th>Stock</th>
     </tr>
     <%
-        ProductoDAO productoDAO = new ProductoDAO();
-        List<Producto> productos = productoDAO.obtenerProductos();
+        DescuentoDAO descuentoDAO = new DescuentoDAO();
+        List<Descuento> descuentos = descuentoDAO.obtenerDescuentos();
 
-        for (Producto producto : productos) {
+        for (Descuento descuento : descuentos) {
     %>
     <tr>
-        <td><%= producto.getNombreProducto() %></td>
-        <td><%= producto.getPrecio() %></td>
-        <td><%= producto.getMarca() %></td>
-        <td><%= producto.getGarantia() %></td>
-        <td><%= producto.getStock() %></td>
+        <td><%= descuento.getCodigo() %></td>
+        <td><%= descuento.getNombre() %></td>
+        <td><%= descuento.getPorcentajeDescuento() %></td>
+        <td><%= descuento.getStock() %></td>
     </tr>
     <% } %>
 </table>
 
-<button onclick="mostrarFormulario()">Agregar Producto</button>
+<button onclick="mostrarFormulario()">Agregar Descuento</button>
 
 <script>
     function mostrarFormulario() {
-        window.open('formularioAgregarProducto.jsp', 'Agregar Producto', 'width=400,height=400');
+        window.open('formularioAgregarDescuento.jsp', 'Agregar Descuento', 'width=400,height=400');
     }
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Evita que se recargue la página al enviar el formulario
         var filtro = document.getElementById('filtro').value;
         var terminoBusqueda = document.getElementById('terminoBusqueda').value;
-        var url = 'buscarProducto?filtro=' + filtro + '&terminoBusqueda=' + terminoBusqueda;
+        var url = 'buscarDescuento?filtro=' + filtro + '&terminoBusqueda=' + terminoBusqueda;
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 // Limpiar la tabla actual
-                var table = document.getElementById('productos');
+                var table = document.getElementById('descuentos');
                 table.innerHTML = '';
                 // Agregar los encabezados de columna con estilo en negrita
                 var headerRow = table.insertRow();
-                var headers = ['Nombre', 'Precio', 'Marca', 'Garantia', 'Stock'];
+                var headers = ['Código', 'Nombre', 'Porcentaje Descuento', 'Stock'];
                 headers.forEach(headerText => {
                     var headerCell = document.createElement('th');
                     headerCell.textContent = headerText;
                     headerCell.style.fontWeight = 'bold'; // Aplica negrita
                     headerRow.appendChild(headerCell);
                 });
-                // Agregar los nuevos productos a la tabla
-                data.forEach(producto => {
+                // Agregar los nuevos descuentos a la tabla
+                data.forEach(descuento => {
                     var row = table.insertRow();
-                    row.insertCell(0).textContent = producto.nombreProducto;
-                    row.insertCell(1).textContent = producto.precio;
-                    row.insertCell(2).textContent = producto.marca;
-                    row.insertCell(3).textContent = producto.garantia;
-                    row.insertCell(4).textContent = producto.stock;
+                    row.insertCell(0).textContent = descuento.codigo;
+                    row.insertCell(1).textContent = descuento.nombre;
+                    row.insertCell(2).textContent = descuento.porcentajeDescuento;
+                    row.insertCell(3).textContent = descuento.stock;
                 });
             });
     });

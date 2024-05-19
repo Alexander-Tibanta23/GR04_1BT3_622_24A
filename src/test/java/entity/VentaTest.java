@@ -2,6 +2,8 @@ package entity;
 
 import org.junit.*;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
 
 public class VentaTest {
@@ -46,15 +48,15 @@ public class VentaTest {
     public void given_venta_when_agregarProducto_then_calculateTotal() {
         System.out.println("test 8");
         Producto producto1 = new Producto();
-        producto1.setNombre("Laptop");
-        producto1.setPrecio(1000.0);
+        producto1.setNombreProducto("Laptop");
+        producto1.setPrecio(BigDecimal.valueOf(1000.0));
         producto1.setMarca("Marca");
         producto1.setGarantia("1 año");
         producto1.setStock(10);
 
         Producto producto2 = new Producto();
-        producto2.setNombre("Mouse");
-        producto2.setPrecio(20.0);
+        producto2.setNombreProducto("Mouse");
+        producto2.setPrecio(BigDecimal.valueOf(20.0));
         producto2.setMarca("MarcaMouse");
         producto2.setGarantia("1 año");
         producto2.setStock(50);
@@ -63,7 +65,8 @@ public class VentaTest {
         venta.agregarProducto(producto2, 5); // 5 mice
 
         double totalEsperado = 1000.0 * 2 + 20.0 * 5; // Precio de las laptops y los mice
-        assertEquals(totalEsperado, venta.calcularTotal(), 0); // 0 de margen de error para comparar doubles
+        double totalVenta = venta.calcularTotal().doubleValue(); // Convertir el BigDecimal a double
+        assertEquals(totalEsperado, totalVenta, 0); // 0 de margen de error para comparar doubles
     }
 
 }
