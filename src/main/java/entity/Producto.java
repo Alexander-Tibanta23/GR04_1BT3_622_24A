@@ -1,9 +1,6 @@
 package entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -11,6 +8,7 @@ import java.math.BigDecimal;
 @Table(name = "productos")
 public class Producto {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProducto", nullable = false)
     private Integer id;
 
@@ -29,17 +27,13 @@ public class Producto {
     @Column(name = "stock")
     private Integer stock;
 
-    public Producto(Integer id, String nombreProducto, BigDecimal precio, String marca, String garantia, Integer stock) {
+    public Producto(Integer id, String nombreProducto, double precio, String marca, String garantia, Integer stock) {
         this.id = id;
         this.nombreProducto = nombreProducto;
-        this.precio = precio;
+        this.precio = BigDecimal.valueOf(precio);
         this.marca = marca;
         this.garantia = garantia;
         this.stock = stock;
-    }
-
-    public Producto(String nombreProducto, double precioProducto, String marcaProducto, String garantiaProducto, int cantidadProducto) {
-
     }
 
     public Producto() {

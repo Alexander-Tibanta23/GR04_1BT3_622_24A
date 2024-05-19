@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Sistema de Punto de Venta</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Sistema Punto Venta</title>
 </head>
 <body>
 <section class="py-10 bg-white sm:py-16 lg:py-24">

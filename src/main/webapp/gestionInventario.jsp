@@ -1,12 +1,12 @@
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.gr04_1bt3_622_24a.InventarioService" %>
+<%@ page import="dao.ProductoDAO" %>
 <%@ page import="entity.Producto" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestion de Inventario</title>
+    <title>Gesti&oacute;n de Inventario</title>
     <style>
         table {
             width: 100%;
@@ -32,10 +32,10 @@
     <label for="filtro">Filtrar por:</label>
     <select id="filtro" name="filtro">
         <option value="nombreProducto">Nombre</option>
-        <option value="precioProducto">Precio</option>
-        <option value="marcaProducto">Marca</option>
-        <option value="garantiaProducto">Garantía</option>
-        <option value="cantidadProducto">Cantidad</option>
+        <option value="precio">Precio</option>
+        <option value="marca">Marca</option>
+        <option value="garantia">Garantía</option>
+        <option value="stock">Stock</option>
     </select>
     <label for="terminoBusqueda">Termino de busqueda:</label>
     <input type="text" id="terminoBusqueda" name="terminoBusqueda">
@@ -52,13 +52,13 @@
         <th>Stock</th>
     </tr>
     <%
-        InventarioService inventarioService = new InventarioService();
-        List<Producto> productos = inventarioService.obtenerProductos();
+        ProductoDAO productoDAO = new ProductoDAO();
+        List<Producto> productos = productoDAO.obtenerProductos();
 
         for (Producto producto : productos) {
     %>
     <tr>
-        <td><%= producto.getNombre() %></td>
+        <td><%= producto.getNombreProducto() %></td>
         <td><%= producto.getPrecio() %></td>
         <td><%= producto.getMarca() %></td>
         <td><%= producto.getGarantia() %></td>
@@ -86,7 +86,7 @@
                 table.innerHTML = '';
                 // Agregar los encabezados de columna con estilo en negrita
                 var headerRow = table.insertRow();
-                var headers = ['Nombre', 'Precio', 'Marca', 'GarantIa', 'Stock'];
+                var headers = ['Nombre', 'Precio', 'Marca', 'Garantia', 'Stock'];
                 headers.forEach(headerText => {
                     var headerCell = document.createElement('th');
                     headerCell.textContent = headerText;
@@ -96,7 +96,7 @@
                 // Agregar los nuevos productos a la tabla
                 data.forEach(producto => {
                     var row = table.insertRow();
-                    row.insertCell(0).textContent = producto.nombre;
+                    row.insertCell(0).textContent = producto.nombreProducto;
                     row.insertCell(1).textContent = producto.precio;
                     row.insertCell(2).textContent = producto.marca;
                     row.insertCell(3).textContent = producto.garantia;

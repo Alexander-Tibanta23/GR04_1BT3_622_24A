@@ -1,4 +1,4 @@
-package org.example.gr04_1bt3_622_24a;
+package servlets;
 
 import java.io.IOException;
 import java.math.BigDecimal;
