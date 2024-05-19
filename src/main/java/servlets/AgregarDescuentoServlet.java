@@ -2,24 +2,22 @@ package servlets;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
-
 import dao.DescuentoDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import entity.Descuento;
-import util.HibernateUtil;
-
-import static java.lang.Double.parseDouble;
 
 @WebServlet("/agregarDescuento")
 public class AgregarDescuentoServlet extends HttpServlet {
+
+    private DescuentoDAO descuentoDAO;
+
+    public AgregarDescuentoServlet() {
+        this.descuentoDAO = new DescuentoDAO();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
