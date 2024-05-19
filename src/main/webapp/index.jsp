@@ -50,9 +50,9 @@
 <body>
 <div class="login-container">
     <h2>Iniciar Sesion</h2>
-    <form action="inicio.jsp" method="POST">
-        <input type="text" name="username" placeholder="Nombre de usuario" required>
-        <input type="password" name="password" placeholder="Contrasenia" required>
+    <form action="../java/servlets/InicioSesionServlet" method="POST"> <!-- Cambiado a InicioSesionServlet -->
+        <input type="text" name="numeroCedula" id="numeroCedula" placeholder="Numero de Cedula" required> <!-- Cambiado a numeroCedula -->
+        <input type="password" name="password" id="password" placeholder="Contrasenia" required> <!-- Cambiado a password -->
         <input type="submit" value="Iniciar Sesion">
     </form>
 </div>
