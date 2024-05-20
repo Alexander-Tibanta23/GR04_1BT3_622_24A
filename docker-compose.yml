@@ -11,6 +11,17 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bd_sistemaventasfactura
 
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8092:8080
+    container_name: webapp
+    depends_on:
+      - mysqldb
+
+
   jenkins:
     image: jenkins/jenkins:lts
     restart: always
