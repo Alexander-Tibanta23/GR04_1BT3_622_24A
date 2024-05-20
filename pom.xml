@@ -8,32 +8,14 @@
     <artifactId>GR04_1BT3_622_24A</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>GR04_1BT3_622_24A</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>11</maven.compiler.target>
-        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
         <junit.version>5.9.2</junit.version>
     </properties>
-
-    <servlet>
-        <servlet-name>AgregarProductoServlet</servlet-name>
-        <servlet-class>AgregarProductoServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AgregarProductoServlet</servlet-name>
-        <url-pattern>/agregarProducto</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ProcesarVentaServlet</servlet-name>
-        <servlet-class>ProcesarVentaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProcesarVentaServlet</servlet-name>
-        <url-pattern>/procesarVenta</url-pattern>
-    </servlet-mapping>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -58,28 +40,33 @@
             <version>5.0.0</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.0.2.Final</version>
         </dependency>
+
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <version>3.0.2</version>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -100,22 +87,9 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>2.23.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>RELEASE</version>
+            <version>7.10.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -125,9 +99,13 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>
