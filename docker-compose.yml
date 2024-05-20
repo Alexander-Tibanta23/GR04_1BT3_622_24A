@@ -1,0 +1,24 @@
+version: "3"
+services:
+
+  mysqldb:
+    image: mysql
+    restart: always
+    container_name: mysqldb
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bd_sistemaventasfactura
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    restart: always
+    container_name: jenkins
+    ports:
+      - 8091:8080
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+volumes:
+  jenkins_home:

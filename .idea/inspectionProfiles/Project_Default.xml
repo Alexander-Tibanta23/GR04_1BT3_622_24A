@@ -13,6 +13,7 @@
           <option value="GR04_1BT3_622_24A" />
           <option value="GR04_1BT3_622_24A" />
           <option value="GR04_1BT3_622_24A" />
+          <option value="GR04_1BT3_622_24A" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -20,10 +21,12 @@
           <option value="com.google.protobuf:protobuf-java:3.19.4" />
           <option value="junit:junit:4.12" />
           <option value="com.google.code.gson:gson:2.8.8" />
+          <option value="org.eclipse.jetty:jetty-server:11.0.12" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
