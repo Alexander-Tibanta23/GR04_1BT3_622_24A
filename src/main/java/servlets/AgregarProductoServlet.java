@@ -7,16 +7,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import entity.Producto;
-import util.HibernateUtil;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 @WebServlet("/agregarProducto")
 public class AgregarProductoServlet extends HttpServlet {
+    private ProductoDAO productoDAO = new ProductoDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +33,10 @@ public class AgregarProductoServlet extends HttpServlet {
         producto.setStock(stock);
 
         // Guardar el producto en la base de datos
-        ProductoDAO productoDAO = new ProductoDAO();
         productoDAO.guardarProducto(producto);
+    }
+
+    public void setProductoDAO(ProductoDAO productoDAO) {
+        this.productoDAO = productoDAO;
     }
 }
