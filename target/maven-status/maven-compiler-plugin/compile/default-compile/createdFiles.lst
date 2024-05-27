@@ -21,6 +21,7 @@ entity\Administradoresinventario.class
 entity\Cliente.class
 incrementos\SaldoInsuficienteException.class
 util\HibernateUtil.class
+Execute\AgregarProductoExecute.class
 incrementos\VerificarPagoRequest.class
 servlets\VentaServlet.class
 dao\ProductoDAO.class
