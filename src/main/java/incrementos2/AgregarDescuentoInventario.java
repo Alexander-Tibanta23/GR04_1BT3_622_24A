@@ -1,21 +1,20 @@
-package servlets;
+package incrementos2;
 
-import java.io.IOException;
-import java.math.BigDecimal;
 import dao.DescuentoDAO;
+import entity.Descuento;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import entity.Descuento;
 
-@WebServlet("/agregarDescuento")
-public class AgregarDescuentoServlet extends HttpServlet {
+import java.io.IOException;
+import java.math.BigDecimal;
+
+public class AgregarDescuentoInventario extends HttpServlet {
 
     private DescuentoDAO descuentoDAO;
 
-    public AgregarDescuentoServlet(DescuentoDAO descuentoDAO) {
+    public AgregarDescuentoInventario(DescuentoDAO descuentoDAO) {
         this.descuentoDAO = descuentoDAO;
     }
 
@@ -49,7 +48,6 @@ public class AgregarDescuentoServlet extends HttpServlet {
         descuento.setStock(stock);
 
         // Guardar el descuento en la base de datos
-        DescuentoDAO descuentoDAO = new DescuentoDAO();
         descuentoDAO.guardarDescuento(descuento);
 
         // Establecer un mensaje de éxito y reenviar a la página JSP
@@ -57,4 +55,5 @@ public class AgregarDescuentoServlet extends HttpServlet {
         request.setAttribute("agregarOtro", true);
         request.getRequestDispatcher("gestionInventario.jsp").forward(request, response);
     }
+
 }

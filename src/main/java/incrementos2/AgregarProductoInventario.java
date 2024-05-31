@@ -1,25 +1,26 @@
-package servlets;
+package incrementos2;
 
 import dao.ProductoDAO;
-import jakarta.servlet.RequestDispatcher;
+import entity.Producto;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import entity.Producto;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import jakarta.servlet.annotation.WebServlet;
+import util.HibernateUtil;
+
 
 @WebServlet("/agregarProducto")
-public class AgregarProductoServlet extends HttpServlet {
+public class AgregarProductoInventario extends HttpServlet {
+
     private ProductoDAO productoDAO = new ProductoDAO();
 
-    public AgregarProductoServlet(ProductoDAO productoDAO) {
+    public AgregarProductoInventario(ProductoDAO productoDAO) {
         this.productoDAO = productoDAO;
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
@@ -40,7 +41,4 @@ public class AgregarProductoServlet extends HttpServlet {
         productoDAO.guardarProducto(producto);
     }
 
-    public void setProductoDAO(ProductoDAO productoDAO) {
-        this.productoDAO = productoDAO;
-    }
 }

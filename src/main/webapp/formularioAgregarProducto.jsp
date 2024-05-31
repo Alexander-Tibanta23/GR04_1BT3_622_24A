@@ -18,6 +18,9 @@
     <select id="garantia" name="garantia">
         <option value="1">1 año</option>
         <option value="2">2 años</option>
+        <option value="3">3 años</option>
+        <option value="4">4 años</option>
+        <option value="5">5 años</option>
     </select><br>
 
     <label for="stock">Stock:</label>

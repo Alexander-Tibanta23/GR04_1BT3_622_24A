@@ -33,7 +33,7 @@ public class AgregarProductoServletTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        servlet = new AgregarProductoServlet();
+        servlet = new AgregarProductoServlet(productoDAO);
         servlet.setProductoDAO(productoDAO);
     }
 
@@ -65,4 +65,5 @@ public class AgregarProductoServletTest {
         assertEquals(Integer.valueOf(10), productoCapturado.getStock());
         System.out.println("El producto ha sido capturado");
     }
+
 }

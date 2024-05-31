@@ -29,11 +29,13 @@ public class AgregarDescuentoServletTest {
     RequestDispatcher requestDispatcher;
 
     private AgregarDescuentoServlet servlet;
+    @Mock
+    private DescuentoDAO descuentoDAO;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        servlet = new AgregarDescuentoServlet();
+        servlet = new AgregarDescuentoServlet(descuentoDAO);
     }
 
     @After
